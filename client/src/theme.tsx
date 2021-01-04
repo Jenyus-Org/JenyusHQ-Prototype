@@ -67,6 +67,21 @@ export const makeLightTheme = (theme?: ThemeOptions) =>
     },
   });
 
+const darkTheme = {
+  paper: "#1F1F1F",
+  default: "#1A1A1A",
+};
+
+const purpleDarkTheme = {
+  paper: "#242631",
+  default: "#1F1F27",
+};
+
+const blueDarkTheme = {
+  paper: "#1D262F",
+  default: "#1f2327",
+};
+
 export const makeDarkTheme = (theme?: ThemeOptions) =>
   createMuiTheme({
     ...theme,
@@ -75,8 +90,7 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
       ...theme?.palette,
       divider: "#2e2e2e",
       background: {
-        paper: "#1F1F1F",
-        default: "#1A1A1A",
+        ...blueDarkTheme,
       },
       text: {
         primary: "#fff",
@@ -99,7 +113,7 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
           boxShadow: "0 4px 10px 0rgba(12, 12, 12, 0.8)",
         },
         colorDefault: {
-          backgroundColor: "#1F1F1F",
+          backgroundColor: blueDarkTheme.paper,
           color: "#eee",
         },
       },
