@@ -139,65 +139,69 @@ const blueDarkThemeBackground = {
   default: "#1f2327",
 };
 
-export const makeDarkTheme = (theme?: ThemeOptions) =>
-  createMuiTheme({
-    ...theme,
-    palette: {
-      ...theme?.palette,
-      divider: "#2e2e2e",
-      background: {
-        ...purpleDarkThemeBackground,
-      },
-      text: {
-        primary: "#fff",
-        secondary: "rgba(255, 255, 255, 0.7)",
-        disabled: "rgba(255, 255, 255, 0.5)",
-      },
-      action: {
-        active: "#fff",
-        hover: "rgba(255, 255, 255, 0.08)",
-        selected: "rgba(255, 255, 255, 0.16)",
-        disabled: "rgba(255, 255, 255, 0.3)",
-        disabledBackground: "rgba(255, 255, 255, 0.12)",
-      },
-    },
-    overrides: {
-      ...theme?.overrides,
-      MuiAppBar: {
-        ...theme?.overrides?.MuiAppBar,
-        root: {
-          boxShadow: darkTheme.frameShadow,
+const makeDarkThemeFactory = (backgroundColors = purpleDarkThemeBackground) => {
+  return (theme?: ThemeOptions) =>
+    createMuiTheme({
+      ...theme,
+      palette: {
+        ...theme?.palette,
+        divider: "#2e2e2e",
+        background: {
+          ...backgroundColors,
         },
-        colorDefault: {
-          backgroundColor: purpleDarkThemeBackground.paper,
-          color: "#eee",
+        text: {
+          primary: "#fff",
+          secondary: "rgba(255, 255, 255, 0.7)",
+          disabled: "rgba(255, 255, 255, 0.5)",
+        },
+        action: {
+          active: "#fff",
+          hover: "rgba(255, 255, 255, 0.08)",
+          selected: "rgba(255, 255, 255, 0.16)",
+          disabled: "rgba(255, 255, 255, 0.3)",
+          disabledBackground: "rgba(255, 255, 255, 0.12)",
         },
       },
-      MuiDrawer: {
-        paperAnchorDockedLeft: {
-          ...theme?.overrides?.MuiDrawer?.paperAnchorDockedLeft,
-          boxShadow: darkTheme.frameShadow,
+      overrides: {
+        ...theme?.overrides,
+        MuiAppBar: {
+          ...theme?.overrides?.MuiAppBar,
+          root: {
+            boxShadow: darkTheme.frameShadow,
+          },
+          colorDefault: {
+            backgroundColor: backgroundColors.paper,
+            color: "#eee",
+          },
+        },
+        MuiDrawer: {
+          paperAnchorDockedLeft: {
+            ...theme?.overrides?.MuiDrawer?.paperAnchorDockedLeft,
+            boxShadow: darkTheme.frameShadow,
+          },
+        },
+        MuiCard: {
+          ...theme?.overrides?.MuiCard,
+          root: {
+            ...theme?.overrides?.MuiCard?.root,
+            boxShadow: darkTheme.cardShadow,
+          },
+        },
+        MuiTableRow: {
+          ...theme?.overrides?.MuiTableRow,
+          root: {
+            backgroundColor: backgroundColors.paper,
+          },
+        },
+        MuiTableCell: {
+          ...theme?.overrides?.MuiTableCell,
+          root: {
+            ...theme?.overrides?.MuiTableCell?.root,
+            borderBottom: "none",
+          },
         },
       },
-      MuiCard: {
-        ...theme?.overrides?.MuiCard,
-        root: {
-          ...theme?.overrides?.MuiCard?.root,
-          boxShadow: darkTheme.cardShadow,
-        },
-      },
-      MuiTableRow: {
-        ...theme?.overrides?.MuiTableRow,
-        root: {
-          backgroundColor: purpleDarkThemeBackground.paper,
-        },
-      },
-      MuiTableCell: {
-        ...theme?.overrides?.MuiTableCell,
-        root: {
-          ...theme?.overrides?.MuiTableCell?.root,
-          borderBottom: "none",
-        },
-      },
-    },
-  });
+    });
+};
+
+export const makeDarkTheme = makeDarkThemeFactory();
