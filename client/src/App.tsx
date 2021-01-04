@@ -1,6 +1,9 @@
 import {
   AppBar,
   Button,
+  Card,
+  CardActions,
+  CardContent,
   CssBaseline,
   Divider,
   Drawer,
@@ -90,10 +93,22 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
+  },
+  cardTitle: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
 }));
 
 function App() {
   const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
   const [open, setOpen] = React.useState(false);
   const [darkTheme, setDarkTheme] = React.useState(false);
 
@@ -190,6 +205,31 @@ function App() {
             <Button variant="contained" color="secondary">
               Hello World
             </Button>
+            <Card className={classes.root}>
+              <CardContent>
+                <Typography
+                  className={classes.cardTitle}
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  Word of the Day
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  be{bull}nev{bull}o{bull}lent
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+                <Typography variant="body2" component="p">
+                  well meaning and kindly.
+                  <br />
+                  {'"a benevolent smile"'}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
           </main>
         </ThemeProvider>
       </ThemeProvider>

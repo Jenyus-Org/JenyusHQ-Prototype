@@ -44,6 +44,12 @@ export const theme = createMuiTheme({
         },
       },
     },
+    MuiCard: {
+      root: {
+        boxShadow: "0 5px 15px 5px rgba(182, 170, 170, 0.15)",
+        borderRadius: "15px",
+      },
+    },
   },
 });
 
@@ -69,8 +75,8 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
       ...theme?.palette,
       divider: "#2e2e2e",
       background: {
-        paper: "#1a1a1a",
-        default: "#212121",
+        paper: "#1F1F1F",
+        default: "#1A1A1A",
       },
       text: {
         primary: "#fff",
@@ -90,17 +96,23 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
       MuiAppBar: {
         ...theme?.overrides?.MuiAppBar,
         root: {
-          boxShadow: "0 4px 10px 0rgba(56, 56, 56, 0.3)",
+          boxShadow: "0 4px 10px 0rgba(12, 12, 12, 0.8)",
         },
         colorDefault: {
-          backgroundColor: "#1a1a1a",
+          backgroundColor: "#1F1F1F",
           color: "#eee",
         },
       },
       MuiDrawer: {
         paperAnchorDockedLeft: {
           ...theme?.overrides?.MuiDrawer?.paperAnchorDockedLeft,
-          boxShadow: "0 4px 10px 0 rgba(56, 56, 56, 0.3)",
+          boxShadow: "0 4px 10px 0 rgba(12, 12, 12, 0.8)",
+        },
+      },
+      MuiCard: {
+        root: {
+          ...theme?.overrides?.MuiCard?.root,
+          boxShadow: "0 5px 15px 5px rgba(12, 12, 12, 0.8)",
         },
       },
     },
