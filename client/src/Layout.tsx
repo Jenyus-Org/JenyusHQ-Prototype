@@ -16,16 +16,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FolderIcon from "@material-ui/icons/Folder";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import RestoreIcon from "@material-ui/icons/Restore";
 import clsx from "clsx";
 import React from "react";
+import { Link, match, matchPath, useLocation } from "react-router-dom";
 import "./App.css";
 import { ReactComponent as JenyusLogo } from "./assets/Jenyus.svg";
 import { theme } from "./theme";
+
+interface LinkButton {
+  url: string;
+  icon: React.ReactNode;
+  text: string;
+}
 
 const drawerWidth = 240;
 
@@ -111,7 +113,10 @@ const useStyles = makeStyles(() => ({
       fill: "white",
       stroke: "white",
     },
+  },
+  logoContainer: {
     marginRight: 24,
+    display: "inline-flex",
   },
   bottomNav: {
     width: "100%",
@@ -141,10 +146,12 @@ interface LayoutProps {
   children?: React.ReactNode;
   darkTheme: boolean;
   toggleDarkTheme: () => void;
+  links: LinkButton[];
 }
 
-function Layout({ children, darkTheme, toggleDarkTheme }: LayoutProps) {
+function Layout({ children, darkTheme, toggleDarkTheme, links }: LayoutProps) {
   const classes = useStyles();
+  const location = useLocation();
 
   const [value, setValue] = React.useState("recents");
 
@@ -152,11 +159,23 @@ function Layout({ children, darkTheme, toggleDarkTheme }: LayoutProps) {
     setValue(newValue);
   };
 
+  const activePath = React.useMemo(
+    () =>
+      links.reduce<match<{}> | null>(
+        (active, link) =>
+          active || (link && matchPath(location.pathname, link.url)),
+        null
+      ),
+    [links, location]
+  );
+
   return (
     <>
       <AppBar position="fixed" color="default" className={classes.appBar}>
         <Toolbar disableGutters>
-          <JenyusLogo className={classes.logo} />
+          <Link to="/" className={classes.logoContainer}>
+            <JenyusLogo className={classes.logo} />
+          </Link>
           <Typography variant="h6" className={classes.title}>
             JenyusHQ
           </Typography>
@@ -181,12 +200,18 @@ function Layout({ children, darkTheme, toggleDarkTheme }: LayoutProps) {
       >
         <div className={classes.toolbar} />
         <List>
-          <ListItem button>
-            <ListItemIcon>
-              <InboxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Inbox" />
-          </ListItem>
+          {links.map((linkButton) => (
+            <ListItem
+              button
+              key={linkButton.url}
+              component={Link}
+              to={linkButton.url}
+              selected={linkButton.url === activePath?.url}
+            >
+              <ListItemIcon>{linkButton.icon}</ListItemIcon>
+              <ListItemText primary={linkButton.text} />
+            </ListItem>
+          ))}
         </List>
         <Divider />
         <List>
@@ -204,30 +229,18 @@ function Layout({ children, darkTheme, toggleDarkTheme }: LayoutProps) {
         <div className={classes.bottomNav} />
       </main>
       <BottomNavigation
-        value={value}
+        value={activePath?.url}
         onChange={handleChange}
         className={classes.bottomNav}
       >
-        <BottomNavigationAction
-          label="Recents"
-          value="recents"
-          icon={<RestoreIcon />}
-        />
-        <BottomNavigationAction
-          label="Favorites"
-          value="favorites"
-          icon={<FavoriteIcon />}
-        />
-        <BottomNavigationAction
-          label="Nearby"
-          value="nearby"
-          icon={<LocationOnIcon />}
-        />
-        <BottomNavigationAction
-          label="Folder"
-          value="folder"
-          icon={<FolderIcon />}
-        />
+        {links.map((linkButton) => (
+          <BottomNavigationAction
+            key={linkButton.url}
+            label={linkButton.text}
+            value={linkButton.url}
+            icon={linkButton.icon}
+          />
+        ))}
       </BottomNavigation>
     </>
   );
