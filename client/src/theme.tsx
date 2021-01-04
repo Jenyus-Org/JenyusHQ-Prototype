@@ -60,7 +60,6 @@ export const theme = createMuiTheme({
         textTransform: "uppercase",
         fontSize: "0.75rem",
         fontWeight: 800,
-        color: "rgba(49, 49, 49, 0.87)",
       },
     },
   },
@@ -121,6 +120,10 @@ export const makeLightTheme = (theme?: ThemeOptions) =>
         root: {
           ...theme?.overrides?.MuiTableCell?.root,
           padding: "20px",
+        },
+        head: {
+          ...theme?.overrides?.MuiTableCell?.head,
+          color: "rgba(49, 49, 49, 0.87)",
         },
       },
     },
