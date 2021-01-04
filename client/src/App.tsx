@@ -146,8 +146,6 @@ const useStyles = makeStyles(() => ({
 
 function App() {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
-  const [open, setOpen] = React.useState(false);
   const [darkTheme, setDarkTheme] = React.useState(false);
 
   const [value, setValue] = React.useState("recents");
@@ -165,13 +163,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <ThemeProvider theme={darkTheme ? makeDarkTheme : makeLightTheme}>
           <CssBaseline />
-          <AppBar
-            position="fixed"
-            color="default"
-            className={clsx(classes.appBar, {
-              [classes.appBarShift]: open,
-            })}
-          >
+          <AppBar position="fixed" color="default" className={classes.appBar}>
             <Toolbar disableGutters>
               <JenyusLogo className={classes.logo} />
               <Typography variant="h6" className={classes.title}>
@@ -184,15 +176,9 @@ function App() {
           </AppBar>
           <Drawer
             variant="permanent"
-            className={clsx(classes.drawer, {
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open,
-            })}
+            className={clsx(classes.drawer, classes.drawerClose)}
             classes={{
-              paper: clsx({
-                [classes.drawerOpen]: open,
-                [classes.drawerClose]: !open,
-              }),
+              paper: classes.drawerClose,
             }}
           >
             <div className={classes.toolbar} />
@@ -217,7 +203,7 @@ function App() {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Typography variant="h4">Projects</Typography>
-            <br/>
+            <br />
             <TableContainer>
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
