@@ -9,12 +9,12 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { Assignment } from "@material-ui/icons";
 import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import Layout from "./Layout";
 import { makeDarkTheme, makeLightTheme, theme } from "./theme";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Assignment } from "@material-ui/icons";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -38,11 +38,16 @@ function App() {
     });
   };
 
+  const colorTheme = React.useMemo(
+    () => (darkTheme ? makeDarkTheme : makeLightTheme),
+    [darkTheme]
+  );
+
   return (
     <Router>
       <div className={classes.root}>
         <ThemeProvider theme={theme}>
-          <ThemeProvider theme={darkTheme ? makeDarkTheme : makeLightTheme}>
+          <ThemeProvider theme={colorTheme}>
             <CssBaseline />
             <Layout
               toggleDarkTheme={toggleDarkTheme}
