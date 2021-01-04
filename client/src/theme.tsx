@@ -90,7 +90,7 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
       ...theme?.palette,
       divider: "#2e2e2e",
       background: {
-        ...blueDarkTheme,
+        ...purpleDarkTheme,
       },
       text: {
         primary: "#fff",
@@ -113,7 +113,7 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
           boxShadow: "0 4px 10px 0rgba(12, 12, 12, 0.8)",
         },
         colorDefault: {
-          backgroundColor: blueDarkTheme.paper,
+          backgroundColor: purpleDarkTheme.paper,
           color: "#eee",
         },
       },
