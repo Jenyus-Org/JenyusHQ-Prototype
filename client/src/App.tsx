@@ -1,18 +1,15 @@
 import {
   AppBar,
+  BottomNavigation,
+  BottomNavigationAction,
   Button,
-  Card,
-  CardActions,
-  CardContent,
   CssBaseline,
   Divider,
   Drawer,
-  IconButton,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Paper,
   Table,
   TableBody,
   TableCell,
@@ -23,21 +20,23 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
-import MenuIcon from "@material-ui/icons/Menu";
+import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FolderIcon from "@material-ui/icons/Folder";
+import LocationOnIcon from "@material-ui/icons/LocationOn";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import RestoreIcon from "@material-ui/icons/Restore";
 import clsx from "clsx";
 import React from "react";
 import "./App.css";
+import { ReactComponent as JenyusLogo } from "./assets/Jenyus.svg";
 import { makeDarkTheme, makeLightTheme, theme } from "./theme";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
   },
@@ -83,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: "hidden",
-    width: theme.spacing(3) + 1,
+    width: 0,
     [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9) + 1,
     },
@@ -93,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
+    marginBottom: theme.spacing(1),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
@@ -114,6 +114,34 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 650,
   },
+  logo: {
+    width: theme.spacing(9) + 1,
+    height: theme.spacing(9) + 1,
+    fill: "white",
+    stroke: "white",
+    backgroundColor: theme.palette.primary.main,
+    "& line, & text": {
+      fill: "white",
+      stroke: "white",
+    },
+    marginRight: 24,
+  },
+  bottomNav: {
+    width: "100%",
+    position: "fixed",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: theme.spacing(7),
+    transition: theme.transitions.create("height", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    [theme.breakpoints.up("sm")]: {
+      height: 0,
+    },
+    overflow: "hidden",
+  },
 }));
 
 function App() {
@@ -122,12 +150,10 @@ function App() {
   const [open, setOpen] = React.useState(false);
   const [darkTheme, setDarkTheme] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  const [value, setValue] = React.useState("recents");
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+    setValue(newValue);
   };
 
   const toggleDarkTheme = () => {
@@ -146,20 +172,10 @@ function App() {
               [classes.appBarShift]: open,
             })}
           >
-            <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                className={clsx(classes.menuButton, {
-                  [classes.hide]: open,
-                })}
-              >
-                <MenuIcon />
-              </IconButton>
+            <Toolbar disableGutters>
+              <JenyusLogo className={classes.logo} />
               <Typography variant="h6" className={classes.title}>
-                News
+                JenyusHQ
               </Typography>
               <Button color="inherit">
                 <ExitToAppIcon />
@@ -179,16 +195,7 @@ function App() {
               }),
             }}
           >
-            <div className={classes.toolbar}>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === "rtl" ? (
-                  <ChevronRightIcon />
-                ) : (
-                  <ChevronLeftIcon />
-                )}
-              </IconButton>
-            </div>
-            <Divider />
+            <div className={classes.toolbar} />
             <List>
               <ListItem button>
                 <ListItemIcon>
@@ -211,10 +218,7 @@ function App() {
             <div className={classes.toolbar} />
             <Typography variant="h4">Projects</Typography>
             <TableContainer>
-              <Table
-                className={classes.table}
-                aria-label="simple table"
-              >
+              <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
                     <TableCell>Dessert (100g serving)</TableCell>
@@ -237,7 +241,34 @@ function App() {
                 </TableBody>
               </Table>
             </TableContainer>
+            <div className={classes.bottomNav} />
           </main>
+          <BottomNavigation
+            value={value}
+            onChange={handleChange}
+            className={classes.bottomNav}
+          >
+            <BottomNavigationAction
+              label="Recents"
+              value="recents"
+              icon={<RestoreIcon />}
+            />
+            <BottomNavigationAction
+              label="Favorites"
+              value="favorites"
+              icon={<FavoriteIcon />}
+            />
+            <BottomNavigationAction
+              label="Nearby"
+              value="nearby"
+              icon={<LocationOnIcon />}
+            />
+            <BottomNavigationAction
+              label="Folder"
+              value="folder"
+              icon={<FolderIcon />}
+            />
+          </BottomNavigation>
         </ThemeProvider>
       </ThemeProvider>
     </div>
