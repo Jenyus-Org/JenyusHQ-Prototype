@@ -146,7 +146,9 @@ const useStyles = makeStyles(() => ({
 
 function App() {
   const classes = useStyles();
-  const [darkTheme, setDarkTheme] = React.useState(false);
+  const [darkTheme, setDarkTheme] = React.useState(
+    localStorage.getItem("darkMode") === "true"
+  );
 
   const [value, setValue] = React.useState("recents");
 
@@ -155,7 +157,10 @@ function App() {
   };
 
   const toggleDarkTheme = () => {
-    setDarkTheme((darkTheme) => !darkTheme);
+    setDarkTheme((darkTheme) => {
+      localStorage.setItem("darkMode", `${!darkTheme}`);
+      return !darkTheme;
+    });
   };
 
   return (
