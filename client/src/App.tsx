@@ -12,6 +12,13 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
   Toolbar,
   Typography,
 } from "@material-ui/core";
@@ -103,6 +110,9 @@ const useStyles = makeStyles((theme) => ({
   },
   pos: {
     marginBottom: 12,
+  },
+  table: {
+    minWidth: 650,
   },
 }));
 
@@ -199,37 +209,34 @@ function App() {
           </Drawer>
           <main className={classes.content}>
             <div className={classes.toolbar} />
-            <Button variant="contained" color="primary">
-              Hello World
-            </Button>
-            <Button variant="contained" color="secondary">
-              Hello World
-            </Button>
-            <Card className={classes.root}>
-              <CardContent>
-                <Typography
-                  className={classes.cardTitle}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Word of the Day
-                </Typography>
-                <Typography variant="h5" component="h2">
-                  be{bull}nev{bull}o{bull}lent
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                  {'"a benevolent smile"'}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
+            <Typography variant="h4">Projects</Typography>
+            <TableContainer>
+              <Table
+                className={classes.table}
+                aria-label="simple table"
+              >
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Dessert (100g serving)</TableCell>
+                    <TableCell align="right">Calories</TableCell>
+                    <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                    <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                    <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell component="th" scope="row">
+                      Frozen yoghurt
+                    </TableCell>
+                    <TableCell align="right">159</TableCell>
+                    <TableCell align="right">6</TableCell>
+                    <TableCell align="right">24</TableCell>
+                    <TableCell align="right">4</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
           </main>
         </ThemeProvider>
       </ThemeProvider>

@@ -43,6 +43,23 @@ export const theme = createMuiTheme({
         borderRadius: "15px",
       },
     },
+    MuiTable: {
+      root: {
+        borderCollapse: "separate",
+        borderSpacing: "0 5px",
+      },
+    },
+    MuiTableRow: {
+      root: {
+        boxShadow: "none",
+        borderRadius: "15px",
+      },
+    },
+    MuiTableHead: {
+      root: {
+        textTransform: "uppercase",
+      },
+    },
   },
 });
 
@@ -50,9 +67,20 @@ const lightTheme = {
   cardShadow: "0 4px 10px 0 rgba(160, 160, 160, 0.3)",
 };
 
+const lightThemeBackground = {
+  paper: "#fff",
+  default: "#edeef3",
+};
+
 export const makeLightTheme = (theme?: ThemeOptions) =>
   createMuiTheme({
     ...theme,
+    palette: {
+      ...theme?.palette,
+      background: {
+        ...lightThemeBackground,
+      },
+    },
     overrides: {
       ...theme?.overrides,
       MuiAppBar: {
@@ -76,6 +104,13 @@ export const makeLightTheme = (theme?: ThemeOptions) =>
         paperAnchorDockedLeft: {
           ...theme?.overrides?.MuiDrawer?.paperAnchorDockedLeft,
           boxShadow: lightTheme.cardShadow,
+        },
+      },
+      MuiTableContainer: {
+        ...theme?.overrides?.MuiTableContainer,
+        root: {
+          ...theme?.overrides?.MuiTableContainer?.root,
+          background: lightThemeBackground.paper,
         },
       },
     },
@@ -108,7 +143,6 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
   createMuiTheme({
     ...theme,
     palette: {
-      type: "dark",
       ...theme?.palette,
       divider: "#2e2e2e",
       background: {
@@ -146,9 +180,23 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
         },
       },
       MuiCard: {
+        ...theme?.overrides?.MuiCard,
         root: {
           ...theme?.overrides?.MuiCard?.root,
           boxShadow: darkTheme.cardShadow,
+        },
+      },
+      MuiTableRow: {
+        ...theme?.overrides?.MuiTableRow,
+        root: {
+          backgroundColor: purpleDarkThemeBackground.paper,
+        },
+      },
+      MuiTableCell: {
+        ...theme?.overrides?.MuiTableCell,
+        root: {
+          ...theme?.overrides?.MuiTableCell?.root,
+          borderBottom: "none",
         },
       },
     },
