@@ -18,13 +18,13 @@ export const theme = createMuiTheme({
   overrides: {
     MuiAppBar: {
       root: {
-        boxShadow: "0 4px 10px 0 rgba(182, 170, 170, 0.15)",
+        boxShadow: "0 4px 10px 0 rgba(182, 170, 170, 0.3)",
       },
     },
     MuiDrawer: {
       paperAnchorDockedLeft: {
         borderRight: "none",
-        boxShadow: "0 4px 10px 0 rgba(182, 170, 170, 0.15)",
+        boxShadow: "0 4px 10px 0 rgba(182, 170, 170, 0.3)",
       },
     },
     MuiListItemIcon: {
@@ -46,7 +46,7 @@ export const theme = createMuiTheme({
     },
     MuiCard: {
       root: {
-        boxShadow: "0 5px 15px 5px rgba(182, 170, 170, 0.15)",
+        boxShadow: "0 5px 10px 2px rgba(182, 170, 170, 0.3)",
         borderRadius: "15px",
       },
     },
@@ -90,7 +90,7 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
       ...theme?.palette,
       divider: "#2e2e2e",
       background: {
-        ...blueDarkTheme,
+        ...purpleDarkTheme,
       },
       text: {
         primary: "#fff",
@@ -113,7 +113,7 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
           boxShadow: "0 4px 10px 0rgba(12, 12, 12, 0.8)",
         },
         colorDefault: {
-          backgroundColor: blueDarkTheme.paper,
+          backgroundColor: purpleDarkTheme.paper,
           color: "#eee",
         },
       },
