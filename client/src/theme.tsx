@@ -16,15 +16,9 @@ export const theme = createMuiTheme({
     },
   },
   overrides: {
-    MuiAppBar: {
-      root: {
-        boxShadow: "0 4px 10px 0 rgba(182, 170, 170, 0.15)",
-      },
-    },
     MuiDrawer: {
       paperAnchorDockedLeft: {
         borderRight: "none",
-        boxShadow: "0 4px 10px 0 rgba(182, 170, 170, 0.15)",
       },
     },
     MuiListItemIcon: {
@@ -46,12 +40,15 @@ export const theme = createMuiTheme({
     },
     MuiCard: {
       root: {
-        boxShadow: "0 5px 15px 5px rgba(182, 170, 170, 0.15)",
         borderRadius: "15px",
       },
     },
   },
 });
+
+const lightTheme = {
+  cardShadow: "0 4px 10px 0 rgba(160, 160, 160, 0.3)",
+};
 
 export const makeLightTheme = (theme?: ThemeOptions) =>
   createMuiTheme({
@@ -63,21 +60,46 @@ export const makeLightTheme = (theme?: ThemeOptions) =>
         colorDefault: {
           backgroundColor: "#fff",
         },
+        root: {
+          ...theme?.overrides?.MuiAppBar?.root,
+        },
+      },
+      MuiCard: {
+        ...theme?.overrides?.MuiCard,
+        root: {
+          ...theme?.overrides?.MuiCard?.root,
+          boxShadow: lightTheme.cardShadow,
+        },
+      },
+      MuiDrawer: {
+        ...theme?.overrides?.MuiDrawer,
+        paperAnchorDockedLeft: {
+          ...theme?.overrides?.MuiDrawer?.paperAnchorDockedLeft,
+          boxShadow: lightTheme.cardShadow,
+        },
       },
     },
   });
 
 const darkTheme = {
+  cardShadow: "0 5px 15px 5px rgba(12, 12, 12, 0.8)",
+  frameShadow: "0 4px 10px 0rgba(12, 12, 12, 0.8)",
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const darkThemeBackground = {
   paper: "#1F1F1F",
   default: "#1A1A1A",
 };
 
-const purpleDarkTheme = {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const purpleDarkThemeBackground = {
   paper: "#242631",
   default: "#1F1F27",
 };
 
-const blueDarkTheme = {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const blueDarkThemeBackground = {
   paper: "#1D262F",
   default: "#1f2327",
 };
@@ -90,7 +112,7 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
       ...theme?.palette,
       divider: "#2e2e2e",
       background: {
-        ...purpleDarkTheme,
+        ...purpleDarkThemeBackground,
       },
       text: {
         primary: "#fff",
@@ -110,23 +132,23 @@ export const makeDarkTheme = (theme?: ThemeOptions) =>
       MuiAppBar: {
         ...theme?.overrides?.MuiAppBar,
         root: {
-          boxShadow: "0 4px 10px 0rgba(12, 12, 12, 0.8)",
+          boxShadow: darkTheme.frameShadow,
         },
         colorDefault: {
-          backgroundColor: purpleDarkTheme.paper,
+          backgroundColor: purpleDarkThemeBackground.paper,
           color: "#eee",
         },
       },
       MuiDrawer: {
         paperAnchorDockedLeft: {
           ...theme?.overrides?.MuiDrawer?.paperAnchorDockedLeft,
-          boxShadow: "0 4px 10px 0 rgba(12, 12, 12, 0.8)",
+          boxShadow: darkTheme.frameShadow,
         },
       },
       MuiCard: {
         root: {
           ...theme?.overrides?.MuiCard?.root,
-          boxShadow: "0 5px 15px 5px rgba(12, 12, 12, 0.8)",
+          boxShadow: darkTheme.cardShadow,
         },
       },
     },
