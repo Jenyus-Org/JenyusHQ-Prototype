@@ -217,6 +217,7 @@ function App() {
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Typography variant="h4">Projects</Typography>
+            <br/>
             <TableContainer>
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
