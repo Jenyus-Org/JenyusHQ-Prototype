@@ -1,27 +1,16 @@
-import {
-  CssBaseline,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@material-ui/core";
+import { Button, CssBaseline, Typography } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Assignment } from "@material-ui/icons";
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Layout from "./Layout";
+import Dashboard from "./pages/Dashboard";
 import { makeDarkTheme, makeLightTheme, theme } from "./theme";
 
 const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
-  },
-  table: {
-    minWidth: 650,
   },
 }));
 
@@ -60,32 +49,22 @@ function App() {
                 },
               ]}
             >
-              <Typography variant="h4">Projects</Typography>
-              <br />
-              <TableContainer>
-                <Table className={classes.table} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Dessert (100g serving)</TableCell>
-                      <TableCell align="right">Calories</TableCell>
-                      <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                      <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                      <TableCell align="right">Protein&nbsp;(g)</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell component="th" scope="row">
-                        Frozen yoghurt
-                      </TableCell>
-                      <TableCell align="right">159</TableCell>
-                      <TableCell align="right">6</TableCell>
-                      <TableCell align="right">24</TableCell>
-                      <TableCell align="right">4</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
+              <Switch>
+                <Route path="/" component={Dashboard} exact />
+                <Route path="/tasks">
+                  <div>Test.</div>
+                </Route>
+
+                <Route path="*">
+                  <Typography variant="h3" component="h1">
+                    Error!
+                  </Typography>
+                  <br />
+                  <Typography variant="h4" component="p">
+                    404: Not Found
+                  </Typography>
+                </Route>
+              </Switch>
             </Layout>
           </ThemeProvider>
         </ThemeProvider>
