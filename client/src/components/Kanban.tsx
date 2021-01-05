@@ -75,7 +75,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     boxShadow: theme.palette.type === "light" ? theme.shadows[2] : "none",
+    borderRadius:
+      theme.palette.type === "light" ? "8px" : "0px",
     paddingBottom: theme.spacing(2),
+    overflow: "hidden",
   },
   member: {
     flexBasis: 0,

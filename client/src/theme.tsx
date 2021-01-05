@@ -80,7 +80,7 @@ export const theme = createMuiTheme({
     },
     MuiPaper: {
       rounded: {
-        borderRadius: "10px",
+        borderRadius: "8px",
       },
     },
   },
