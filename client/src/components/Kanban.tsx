@@ -14,40 +14,40 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.subtitle1,
     padding: theme.spacing(1),
     textAlign: "center",
+    borderRadius: theme.palette.type === "light" ? "0px" : theme.shape.borderRadius,
   },
   title_1: {
-    backgroundColor: theme.palette.type === "light" ? "#a8ff78" : "#0a742d",
+    backgroundColor: theme.palette.type === "light" ? "#a8ff78" : "#134e5e",
     background:
       theme.palette.type === "light"
         ? "linear-gradient(to right, #a8ff78, #78ffd6)"
-        : "linear-gradient(to right, #0a742d 0%, rgba(106,187,20,1) 25%, rgba(9,124,16,1) 100%)",
+        : "linear-gradient(to right, #134e5e, #71b280)",
     color:
       theme.palette.type === "light"
         ? theme.palette.getContrastText("#a8ff78")
-        : theme.palette.getContrastText("#0a742d"),
+        : theme.palette.getContrastText("#134e5e"),
   },
   title_2: {
-    backgroundColor:
-      theme.palette.type === "light" ? "#f85032" : "rgb(196,36,36)",
+    backgroundColor: theme.palette.type === "light" ? "#f85032" : "#333333",
     background:
       theme.palette.type === "light"
         ? "linear-gradient(to right, #f85032, #e73827)"
-        : "linear-gradient(to right, #c42424 16%, rgba(222,117,55,1) 32%, rgba(200,46,34,1) 80%)",
+        : "linear-gradient(to right, #333333, #dd1818)",
     color:
       theme.palette.type === "light"
         ? theme.palette.getContrastText("#f85032")
-        : theme.palette.getContrastText("#c42424"),
+        : theme.palette.getContrastText("#333333"),
   },
   title_3: {
-    backgroundColor: theme.palette.type === "light" ? "#2193b0" : "#020024",
+    backgroundColor: theme.palette.type === "light" ? "#2193b0" : "#373b44",
     background:
       theme.palette.type === "light"
         ? "linear-gradient(to right, #2193b0, #6dd5ed)"
-        : "linear-gradient(to right, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(18,18,66,1) 100%)",
+        : "linear-gradient(to right, #373b44, #4286f4)",
     color:
       theme.palette.type === "light"
         ? theme.palette.getContrastText("#2193b0")
-        : theme.palette.getContrastText("#020024"),
+        : theme.palette.getContrastText("#373b44"),
   },
   kanban: {
     display: "flex",
@@ -75,8 +75,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     boxShadow: theme.palette.type === "light" ? theme.shadows[2] : "none",
-    borderRadius:
-      theme.palette.type === "light" ? "8px" : "0px",
+    borderRadius: theme.palette.type === "light" ? theme.shape.borderRadius : "0px",
     paddingBottom: theme.spacing(2),
     overflow: "hidden",
   },
@@ -85,7 +84,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     overflowX: "auto",
     background: theme.palette.background.paper,
-    padding: theme.spacing(0, 1),
   },
   task: {
     background: theme.palette.background.default,
