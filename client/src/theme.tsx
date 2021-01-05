@@ -16,6 +16,19 @@ export const theme = createMuiTheme({
     },
   },
   overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        "*::-webkit-scrollbar": {
+          width: "0.4em",
+        },
+        "*::-webkit-scrollbar-track": {
+          "-webkit-box-shadow": "inset 0 0 6px rgba(0, 0, 0, 0.0)",
+        },
+        "*::-webkit-scrollbar-thumb": {
+          borderRadius: "5px",
+        },
+      },
+    },
     MuiDrawer: {
       paperAnchorDockedLeft: {
         borderRight: "none",
@@ -56,10 +69,18 @@ export const theme = createMuiTheme({
       },
     },
     MuiTableCell: {
+      root: {
+        borderBottom: "none",
+      },
       head: {
         textTransform: "uppercase",
         fontSize: "0.75rem",
         fontWeight: 800,
+      },
+    },
+    MuiPaper: {
+      rounded: {
+        borderRadius: "10px",
       },
     },
   },
@@ -70,8 +91,8 @@ const lightTheme = {
 };
 
 const lightThemeBackground = {
-  paper: "#fff",
-  default: "#edeef3",
+  paper: "#fefeff",
+  default: "#eaedfa",
 };
 
 export const makeLightTheme = (theme?: ThemeOptions) =>
@@ -85,10 +106,22 @@ export const makeLightTheme = (theme?: ThemeOptions) =>
     },
     overrides: {
       ...theme?.overrides,
+      MuiCssBaseline: {
+        ...theme?.overrides?.MuiCssBaseline,
+        "@global": {
+          ...(theme?.overrides?.MuiCssBaseline?.["@global"] as any),
+          "*::-webkit-scrollbar-thumb": {
+            ...theme?.overrides?.MuiCssBaseline?.["@global"]?.[
+              "*::-webkit-scrollbar-thumb"
+            ],
+            backgroundColor: "rgba(0, 0, 0, 0.2)",
+          },
+        },
+      },
       MuiAppBar: {
         ...theme?.overrides?.MuiAppBar,
         colorDefault: {
-          backgroundColor: "#fff",
+          backgroundColor: lightThemeBackground.paper,
         },
         root: {
           ...theme?.overrides?.MuiAppBar?.root,
@@ -108,19 +141,20 @@ export const makeLightTheme = (theme?: ThemeOptions) =>
           boxShadow: lightTheme.cardShadow,
         },
       },
-      MuiTableContainer: {
-        ...theme?.overrides?.MuiTableContainer,
+      MuiTableHead: {
         root: {
-          ...theme?.overrides?.MuiTableContainer?.root,
-          background: lightThemeBackground.paper,
+          borderRadius: "10px",
+          backgroundColor: lightThemeBackground.paper,
+        },
+      },
+      MuiTableBody: {
+        root: {
+          borderRadius: "10px",
+          backgroundColor: lightThemeBackground.paper,
         },
       },
       MuiTableCell: {
         ...theme?.overrides?.MuiTableCell,
-        root: {
-          ...theme?.overrides?.MuiTableCell?.root,
-          padding: "20px",
-        },
         head: {
           ...theme?.overrides?.MuiTableCell?.head,
           color: "rgba(49, 49, 49, 0.87)",
@@ -177,6 +211,18 @@ const makeDarkThemeFactory = (backgroundColors = purpleDarkThemeBackground) => {
       },
       overrides: {
         ...theme?.overrides,
+        MuiCssBaseline: {
+          ...theme?.overrides?.MuiCssBaseline,
+          "@global": {
+            ...(theme?.overrides?.MuiCssBaseline?.["@global"] as any),
+            "*::-webkit-scrollbar-thumb": {
+              ...theme?.overrides?.MuiCssBaseline?.["@global"]?.[
+                "*::-webkit-scrollbar-thumb"
+              ],
+              backgroundColor: "rgba(0, 0, 0, 0.4)",
+            },
+          },
+        },
         MuiAppBar: {
           ...theme?.overrides?.MuiAppBar,
           root: {
@@ -204,13 +250,6 @@ const makeDarkThemeFactory = (backgroundColors = purpleDarkThemeBackground) => {
           ...theme?.overrides?.MuiTableRow,
           root: {
             backgroundColor: backgroundColors.paper,
-          },
-        },
-        MuiTableCell: {
-          ...theme?.overrides?.MuiTableCell,
-          root: {
-            ...theme?.overrides?.MuiTableCell?.root,
-            borderBottom: "none",
           },
         },
       },
