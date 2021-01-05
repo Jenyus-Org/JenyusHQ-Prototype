@@ -192,6 +192,7 @@ const makeDarkThemeFactory = (backgroundColors = purpleDarkThemeBackground) => {
       ...theme,
       palette: {
         ...theme?.palette,
+        type: "dark",
         divider: "#2e2e2e",
         background: {
           ...backgroundColors,

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Layout from "./Layout";
 import Dashboard from "./pages/Dashboard";
+import Project from "./pages/Project";
 import { makeDarkTheme, makeLightTheme, theme } from "./theme";
 
 const useStyles = makeStyles(() => ({
@@ -54,7 +55,7 @@ function App() {
                 <Route path="/tasks">
                   <div>Test.</div>
                 </Route>
-
+                <Route path="/projects/:id" component={Project}/>
                 <Route path="*">
                   <Typography variant="h3" component="h1">
                     Error!
