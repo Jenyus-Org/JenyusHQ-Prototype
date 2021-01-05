@@ -1,4 +1,4 @@
-import { Button, CssBaseline, Typography } from "@material-ui/core";
+import { CssBaseline, Typography } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Assignment } from "@material-ui/icons";
 import React from "react";
@@ -55,7 +55,7 @@ function App() {
                 <Route path="/tasks">
                   <div>Test.</div>
                 </Route>
-                <Route path="/projects/:id" component={Project}/>
+                <Route path="/projects/:id" component={Project} />
                 <Route path="*">
                   <Typography variant="h3" component="h1">
                     Error!
