@@ -2,6 +2,8 @@ import { CssBaseline, Typography } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
 import { Assignment } from "@material-ui/icons";
 import React from "react";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Layout from "./Layout";
@@ -34,43 +36,45 @@ function App() {
   );
 
   return (
-    <Router>
-      <div className={classes.root}>
-        <ThemeProvider theme={theme}>
-          <ThemeProvider theme={colorTheme}>
-            <CssBaseline />
-            <Layout
-              toggleDarkTheme={toggleDarkTheme}
-              darkTheme={darkTheme}
-              links={[
-                {
-                  icon: <Assignment />,
-                  text: "Tasks",
-                  url: "/tasks",
-                },
-              ]}
-            >
-              <Switch>
-                <Route path="/" component={Dashboard} exact />
-                <Route path="/tasks">
-                  <div>Test.</div>
-                </Route>
-                <Route path="/projects/:id" component={Project} />
-                <Route path="*">
-                  <Typography variant="h3" component="h1">
-                    Error!
-                  </Typography>
-                  <br />
-                  <Typography variant="h4" component="p">
-                    404: Not Found
-                  </Typography>
-                </Route>
-              </Switch>
-            </Layout>
+    <DndProvider backend={HTML5Backend}>
+      <Router>
+        <div className={classes.root}>
+          <ThemeProvider theme={theme}>
+            <ThemeProvider theme={colorTheme}>
+              <CssBaseline />
+              <Layout
+                toggleDarkTheme={toggleDarkTheme}
+                darkTheme={darkTheme}
+                links={[
+                  {
+                    icon: <Assignment />,
+                    text: "Tasks",
+                    url: "/tasks",
+                  },
+                ]}
+              >
+                <Switch>
+                  <Route path="/" component={Dashboard} exact />
+                  <Route path="/tasks">
+                    <div>Test.</div>
+                  </Route>
+                  <Route path="/projects/:id" component={Project} />
+                  <Route path="*">
+                    <Typography variant="h3" component="h1">
+                      Error!
+                    </Typography>
+                    <br />
+                    <Typography variant="h4" component="p">
+                      404: Not Found
+                    </Typography>
+                  </Route>
+                </Switch>
+              </Layout>
+            </ThemeProvider>
           </ThemeProvider>
-        </ThemeProvider>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </DndProvider>
   );
 }
 

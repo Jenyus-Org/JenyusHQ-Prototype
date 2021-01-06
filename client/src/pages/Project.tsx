@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import clsx from "clsx";
 import React from "react";
-import Kanban from "../components/Kanban";
+import Kanban from "../components/kanban/Kanban";
 
 const useStyles = makeStyles((theme) => ({
   sidebar: {
